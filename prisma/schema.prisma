@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model MmOverseerEpochStates {
+  height               String   @db.VarChar(255)
+  deposit_rate         String   @db.VarChar(255)
+  prev_aterra_supply   String   @db.VarChar(255)
+  prev_exchange_rate   String   @db.VarChar(255)
+  prev_interest_buffer String   @db.VarChar(255)
+  last_executed_height BigInt   @id @db.UnsignedBigInt
+  createdAt            DateTime @db.DateTime(0)
+  updatedAt            DateTime @db.DateTime(0)
+}
