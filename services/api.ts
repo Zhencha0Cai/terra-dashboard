@@ -1,8 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+const publicUrl = process.env.NEXT_PUBLIC_VERCEL_URL;
+const host =
+  publicUrl && !publicUrl.includes("localhost")
+    ? `https://${publicUrl}`
+    : "http://localhost:3000";
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${host}/api/` }),
   endpoints: (builder) => ({
     getStableCoins: builder.query<any, void>({
       query: () => "stablecoins",

@@ -19,7 +19,6 @@ interface ChartProps {
 }
 const LineChart = ({ ids, data }: ChartProps) => {
   const [legend, setLegend] = useState(() => initLegendState(ids));
-  console.log(data, "ii");
   return (
     <ResponsiveContainer>
       <Chart

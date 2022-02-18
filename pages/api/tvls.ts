@@ -62,6 +62,7 @@ const formatTvlData = (chainData: Array<any>) => {
 
 const getTvls = async (req: NextApiRequest, res: NextApiResponse) => {
   const result = formatTvlData(await getTopChains());
+  // client.set(req.url as string, JSON.stringify(result), "EX", 60);
   client.setEx(req.url as string, 60, JSON.stringify(result));
   res.status(200).json(result);
 };
@@ -69,3 +70,5 @@ const getTvls = async (req: NextApiRequest, res: NextApiResponse) => {
 export default withRedis(async (req: NextApiRequest, res: NextApiResponse) => {
   return getTvls(req, res);
 });
+
+// export default getTvls;

@@ -23,8 +23,10 @@ export const getYieldReserve = async (
     }),
   };
   client.setEx(req.url as string, 60 * 60, JSON.stringify(result));
+  // client.set(req.url as string, JSON.stringify(result), "EX", 60);
   return res.json(result);
 };
 export default withRedis(async (req: NextApiRequest, res: NextApiResponse) =>
   getYieldReserve(req, res)
 );
+// export default getYieldReserve;

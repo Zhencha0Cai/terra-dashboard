@@ -43,9 +43,11 @@ const getTxVolume = async (req: NextApiRequest, res: NextApiResponse) => {
     periodic: formatTxData(groupByDenom(periodic)),
   };
   client.setEx(req.url as string, 60, JSON.stringify(result));
+  // client.set(req.url as string, JSON.stringify(result), "EX", 60);
   res.json(result);
 };
 
 export default withRedis(async (req: NextApiRequest, res: NextApiResponse) =>
   getTxVolume(req, res)
 );
+// export default getTxVolume;

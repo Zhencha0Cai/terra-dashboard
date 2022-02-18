@@ -86,3 +86,4 @@ const getStableCoins = async (req: NextApiRequest, res: NextApiResponse) => {
 export default withRedis(async (req: NextApiRequest, res: NextApiResponse) =>
   getStableCoins(req, res)
 );
+// export default getStableCoins;

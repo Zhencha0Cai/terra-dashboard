@@ -21,9 +21,11 @@ const getTokenList = async (req: NextApiRequest, res: NextApiResponse) => {
     url: "https://assets.terra.money/icon/svg/Luna.svg",
   });
   client.setEx(req.url as string, 60 * 60 * 24, JSON.stringify(data));
+  // client.set(req.url as string, JSON.stringify(data), "EX", 60 * 60 * 24);
   res.json(data);
 };
 
 export default withRedis(async (req: NextApiRequest, res: NextApiResponse) =>
   getTokenList(req, res)
 );
+// export default getTokenList;

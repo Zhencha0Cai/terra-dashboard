@@ -29,8 +29,10 @@ const getDashBoard = async (req: NextApiRequest, res: NextApiResponse) => {
     ).toFixed(2)}%`,
   };
   client.setEx(req.url as string, 60, JSON.stringify(result));
+  // client.set(req.url as string, JSON.stringify(data), "EX", 60);
   res.json(result);
 };
 export default withRedis(async (req: NextApiRequest, res: NextApiResponse) =>
   getDashBoard(req, res)
 );
+// export default getDashBoard;
