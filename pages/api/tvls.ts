@@ -67,5 +67,6 @@ const getTvls = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default withRedis(async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log(req.headers.host, req.url, "getTvls");
   return getTvls(req, res);
 });

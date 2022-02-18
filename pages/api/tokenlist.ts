@@ -5,6 +5,7 @@ import { FCD } from "../../constants/constants";
 import client, { withRedis } from "../../lib/redis";
 
 const getTokenList = async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log(req.headers.host, req.url, "getTokenList");
   const {
     data: { actives },
   } = await axios.get(`${FCD}/terra/oracle/v1beta1/denoms/actives`);

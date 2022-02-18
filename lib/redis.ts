@@ -8,6 +8,7 @@ const client = createClient();
 
 export const withRedis =
   (handler: Function) => async (req: NextApiRequest, res: NextApiResponse) => {
+    console.log(req.headers.host, req.url);
     const value = await client.get(req.url as string);
     console.log(value);
     if (value) {
