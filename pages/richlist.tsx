@@ -2,6 +2,7 @@ import { Center, Spinner } from "@chakra-ui/react";
 import { readDenom } from "@terra.kitchen/utils";
 import React, { useState } from "react";
 import CustomTable from "../components/customTable";
+import LoadingStack from "../components/loadingStack";
 import Search from "../components/search";
 import { useGetRichListQuery } from "../services/api";
 import { SearchOptionParams } from "../types/common";
@@ -19,7 +20,7 @@ const RichList = () => {
           speed="0.65s"
           emptyColor="gray.200"
           color="blue.500"
-          size="2xl"
+          size="xl"
         />
       </Center>
     );

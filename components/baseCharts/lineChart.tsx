@@ -48,6 +48,7 @@ const LineChart = ({ ids, data }: ChartProps) => {
                   stroke={color}
                   fill={color}
                   hide={hide}
+                  dot={false}
                 />
               );
             })}
@@ -59,6 +60,7 @@ const LineChart = ({ ids, data }: ChartProps) => {
             dataKey={ids[0]}
             stroke={"#82ca9d"}
             fill={"#82ca9d"}
+            dot={false}
           />
         )}
         <Label value="Pages of my website" offset={0} position="top" />
