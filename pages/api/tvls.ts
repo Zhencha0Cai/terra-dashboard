@@ -30,7 +30,7 @@ const getSingleChainTvl = async (name: string, start: Date, end: Date) => {
 };
 
 const getTopChains = async () => {
-  const start = sub(new Date(), { months: 1 });
+  const start = sub(new Date(), { months: 5 });
   const end = add(new Date(), { days: 1 });
   const { data } = await axios.get(`${DEFI_Llama_URL}/chains`);
   const topChains = data

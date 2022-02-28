@@ -15,13 +15,11 @@ import { dataFormater, initLegendState, onClickLegend } from "../../lib/util";
 interface ChartProps {
   ids: Array<string>;
   data: any;
-  yLable: string;
 }
 const LineChart = ({ ids, data }: ChartProps) => {
   const [legend, setLegend] = useState(() => initLegendState(ids));
-  console.log(data, "ii");
   return (
-    <ResponsiveContainer>
+    <ResponsiveContainer debounce={1}>
       <Chart
         data={data}
         margin={{
@@ -34,11 +32,11 @@ const LineChart = ({ ids, data }: ChartProps) => {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
         <YAxis domain={[0, "dataMax"]} tickFormatter={dataFormater} />
-        <Tooltip />
+        <Tooltip formatter={dataFormater} />
         {ids.length > 1 ? (
           <>
             <Legend onClick={(event) => onClickLegend(event, setLegend)} />
-            {ids.map((id: string, i: number) => {
+            {ids.map((id: string) => {
               const { color, hide } = legend[id];
               return (
                 <Line

@@ -28,7 +28,7 @@ const StackedAreaChart = ({ ids, data }: { ids: Array<string>; data: any }) => {
         <YAxis tickFormatter={dataFormater} />
         <Tooltip formatter={dataFormater} />
         <Legend onClick={(event) => onClickLegend(event, setLegend)} />{" "}
-        {ids.map((id, i) => {
+        {ids.map((id) => {
           const { color, hide } = legend[id];
           return (
             <Area

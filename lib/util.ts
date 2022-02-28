@@ -1,4 +1,3 @@
-// import { toggleLegend } from "../slice/chartSlice";
 import { legendColors } from "../constants/constants";
 import { MapData, ChartLegend } from "../types/common";
 export const fetchJson = async (url: string) => {

@@ -8,25 +8,24 @@ import {
   TabList,
   Tabs,
 } from "@chakra-ui/react";
-import { readDenom } from "@terra.kitchen/utils";
 import { useState } from "react";
-import { useGetTxVolumeQuery } from "../../services/api";
+import { useGetWalletGrowthQuery } from "../../services/api";
 import CustomBarChart from "../baseCharts/barChart";
 import LineChart from "../baseCharts/lineChart";
 import LoadingStack from "../loadingStack";
 
-const TxVolumeChart = () => {
-  const { data, isLoading } = useGetTxVolumeQuery();
+const WalletGrowthChart = () => {
+  const { data, isLoading } = useGetWalletGrowthQuery();
   const [type, setType] = useState("cumulative");
-  const [denom, setDenom] = useState("uusd");
+  const [walletType, setWalletType] = useState("total");
   const [tabIndex, setTabIndex] = useState(0);
-  const [slicedData, setSlicedData] = useState(data && data[type][denom]);
+  const [slicedData, setSlicedData] = useState(data && data[type][walletType]);
   useEffect(() => {
-    setSlicedData(data && data[type][denom]);
-  }, [data, type, denom]);
+    setSlicedData(data && data[type][walletType]);
+  }, [data, type, walletType]);
   const handleTabChange = (i: number) => {
     setTabIndex(i);
-    setSlicedData(data[type][denom].slice([0, -7, -14, -30][i]));
+    setSlicedData(data[type][walletType].slice([0, -7, -14, -30][i]));
   };
   if (isLoading) return <LoadingStack />;
   const { ids } = data;
@@ -48,26 +47,31 @@ const TxVolumeChart = () => {
       >
         <Flex justify={"space-between"}>
           <Heading as="h5" size={"sm"} textAlign={"center"} p={2}>
-            Transaction Volume
+            Wallets
           </Heading>
-          <Flex justify={"end"}>
+          <Flex>
             <Select
-              value={denom}
+              value={walletType}
               size={"sm"}
               width={"6em"}
-              onChange={(e) => setDenom(e.target.value)}
+              onChange={(e) =>
+                e.target.value === "active" && type === "cumulative"
+                  ? setWalletType("total")
+                  : setWalletType(e.target.value)
+              }
             >
-              {Object.keys(data.cumulative).map((d) => (
-                <option key={d} value={d}>
-                  {readDenom(d)}
-                </option>
-              ))}
+              <option value={"total"}>Total</option>
+              <option value={"active"}>Active</option>
             </Select>
             <Select
               value={type}
               size={"sm"}
               width={"9em"}
-              onChange={(e) => setType(e.target.value)}
+              onChange={(e) =>
+                e.target.value === "cumulative" && walletType === "active"
+                  ? setType("periodic")
+                  : setType(e.target.value)
+              }
             >
               <option value={"periodic"}>Periodic</option>
               <option value={"cumulative"}>Cumulative</option>
@@ -93,4 +97,4 @@ const TxVolumeChart = () => {
   );
 };
 
-export default TxVolumeChart;
+export default WalletGrowthChart;

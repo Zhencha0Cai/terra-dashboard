@@ -25,6 +25,9 @@ export const api = createApi({
     getRichList: builder.query<any, string>({
       query: (denom) => `richlist/${denom}`,
     }),
+    getWalletGrowth: builder.query<any, void>({
+      query: () => "wallet-growth",
+    }),
   }),
 });
 
@@ -36,4 +39,5 @@ export const {
   useGetTxVolumeQuery,
   useGetTokenListQuery,
   useGetRichListQuery,
+  useGetWalletGrowthQuery,
 } = api;

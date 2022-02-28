@@ -17,7 +17,7 @@ const CustomBarChart = ({ ids, data }: { ids: string[]; data: any }) => {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
         <YAxis tickFormatter={dataFormater} style={{ fontSize: "0.8em" }} />
-        <Tooltip />
+        <Tooltip formatter={dataFormater} />
         <Bar dataKey={ids[0]} fill="#8884d8" />
       </BarChart>
     </ResponsiveContainer>

@@ -23,7 +23,7 @@ const StableCoinMarketCapChart = () => {
       <Heading as="h5" size="sm" textAlign={"center"}>
         {"Top stablecoins market cap"}
       </Heading>
-      <LineChart ids={ids} data={marketCapData} yLable="in UST"></LineChart>
+      <LineChart ids={ids} data={marketCapData}></LineChart>
     </Box>
   );
 };

@@ -2,6 +2,7 @@ import { Box, Wrap, WrapItem } from "@chakra-ui/react";
 import StableCoinMarketCapChart from "./customCharts/stableCoinMarketCapChart";
 import TvlChart from "./customCharts/tvlsChart";
 import TxVolumeChart from "./customCharts/txVolumeChart";
+import WalletGrowthChart from "./customCharts/walletGrowthChart";
 import YieldReserveChart from "./customCharts/yieldReserveChart";
 const ChartDashboard = () => {
   return (
@@ -22,6 +23,9 @@ const ChartDashboard = () => {
       </WrapItem>
       <WrapItem w={["100%", "100%", "100%", "48%"]}>
         <TxVolumeChart />
+      </WrapItem>
+      <WrapItem w={["100%", "100%", "100%", "48%"]}>
+        <WalletGrowthChart />
       </WrapItem>
     </Wrap>
   );

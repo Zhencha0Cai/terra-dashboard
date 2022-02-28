@@ -22,7 +22,7 @@ const YieldReserveChart = () => {
       <Heading as="h5" size="sm" textAlign={"center"}>
         {"Anchor Yield Reserve"}
       </Heading>
-      <LineChart ids={ids} data={yieldReserveData} yLable="in UST"></LineChart>
+      <LineChart ids={ids} data={yieldReserveData}></LineChart>
     </Box>
   );
 };
