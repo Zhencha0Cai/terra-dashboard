@@ -26,7 +26,7 @@ import { Pagination } from "semantic-ui-react";
 import React from "react";
 import { readAmount, readDenom, truncate } from "@terra.kitchen/utils";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
-import { useGetBalanceChangeQuery } from "../services/api";
+import { useGetBalanceHistoryQuery } from "../services/api";
 import { useState } from "react";
 import LineChart from "./baseCharts/lineChart";
 import { format, getTime } from "date-fns";
@@ -76,7 +76,7 @@ const ModalChart = ({
   setAddress,
   token,
 }: ModalChartProps) => {
-  const { data, isLoading } = useGetBalanceChangeQuery(address);
+  const { data, isLoading } = useGetBalanceHistoryQuery(address);
 
   const processedData = data?.balance
     ?.map((b) => b.filter(({ denom }) => denom === token))

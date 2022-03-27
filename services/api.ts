@@ -29,7 +29,7 @@ export const api = createApi({
     getWalletGrowth: builder.query<any, void>({
       query: () => "wallet-growth",
     }),
-    getBalanceChange: builder.query<BalanceHistory, string>({
+    getBalanceHistory: builder.query<BalanceHistory, string>({
       query: (account) => `balance/${account}`,
     }),
   }),
@@ -44,5 +44,5 @@ export const {
   useGetTokenListQuery,
   useGetRichListQuery,
   useGetWalletGrowthQuery,
-  useGetBalanceChangeQuery,
+  useGetBalanceHistoryQuery,
 } = api;

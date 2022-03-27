@@ -2,10 +2,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import BN from "bignumber.js";
 import axios from "axios";
 import { FCD } from "../../../constants/constants";
-import { withRedis } from "../../../lib/redis";
+import client, { withRedis } from "../../../lib/redis";
 import { prisma } from "../../../lib/prisma";
 
-const getBalanceChange = async (req: NextApiRequest, res: NextApiResponse) => {
+const getBalanceHistory = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { account } = req.query;
     const step = (60 * 60 * 24) / 6;
@@ -26,17 +26,32 @@ const getBalanceChange = async (req: NextApiRequest, res: NextApiResponse) => {
     if (currentHeight.plus(step).gt(maxHeight)) {
       return res.json(record?.balance_history);
     }
+
+    const blockHeights = [];
+
     while (currentHeight.lt(maxHeight)) {
-      const {
-        data: { block },
-      } = await axios(`${FCD}/blocks/${currentHeight}`);
-      const { data } = await axios(
-        `${FCD}/cosmos/bank/v1beta1/balances/${account}?height=${currentHeight}`
-      );
-      date.push(block.header.time);
-      balance.push(data.balances);
+      blockHeights.push(currentHeight);
       currentHeight = currentHeight.plus(step);
     }
+    date.push(
+      ...(await (
+        await Promise.all(
+          blockHeights.map((height) => axios(`${FCD}/blocks/${height}`))
+        )
+      ).map(({ data }) => data.block.header.time))
+    );
+    balance.push(
+      ...(await (
+        await Promise.all(
+          blockHeights.map((height) =>
+            axios(
+              `${FCD}/cosmos/bank/v1beta1/balances/${account}?height=${height}`
+            )
+          )
+        )
+      ).map(({ data }) => data.balances))
+    );
+
     const { data } = await axios(
       `${FCD}/cosmos/bank/v1beta1/balances/${account}?height=${maxHeight}`
     );
@@ -47,14 +62,15 @@ const getBalanceChange = async (req: NextApiRequest, res: NextApiResponse) => {
       address: account as string,
       balance_history: { date, balance },
     };
-    const a = await prisma.balanceHistory.upsert({
+    const { balance_history } = await prisma.balanceHistory.upsert({
       where: {
         address: account as string,
       },
       update: payload,
       create: payload,
     });
-    return res.json({ ids: ["balance"], date, balance });
+    client.setEx(req.url as string, 60 * 60, JSON.stringify(balance_history));
+    return res.json({ date, balance });
   } catch (error) {
     console.log(error);
   }
@@ -62,5 +78,5 @@ const getBalanceChange = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default withRedis(async (req: NextApiRequest, res: NextApiResponse) =>
-  getBalanceChange(req, res)
+  getBalanceHistory(req, res)
 );
