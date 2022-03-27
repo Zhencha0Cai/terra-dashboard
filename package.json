@@ -14,7 +14,6 @@
     "@choc-ui/paginator": "^3.4.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@mui/material": "^5.4.1",
     "@prisma/client": "^3.8.1",
     "@reduxjs/toolkit": "^1.7.1",
     "@terra.kitchen/utils": "^1.0.6",

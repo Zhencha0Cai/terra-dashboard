@@ -20,3 +20,8 @@ export interface CustomSearchProps {
   token: string;
   handleOnOptionSelect: (params: SearchOptionParams) => boolean | void;
 }
+
+export interface TokenAmount {
+  amount: string | number;
+  denom: string;
+}

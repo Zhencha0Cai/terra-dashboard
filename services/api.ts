@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BalanceHistory } from "../types/response";
 
 export const api = createApi({
   reducerPath: "api",
@@ -11,7 +12,7 @@ export const api = createApi({
       query: () => "tvls",
     }),
     getYieldReserve: builder.query<any, void>({
-      query: () => "yieldReserve",
+      query: () => "yield-reserve",
     }),
     getDashboard: builder.query<any, void>({
       query: () => "dashboard",
@@ -28,6 +29,9 @@ export const api = createApi({
     getWalletGrowth: builder.query<any, void>({
       query: () => "wallet-growth",
     }),
+    getBalanceChange: builder.query<BalanceHistory, string>({
+      query: (account) => `balance/${account}`,
+    }),
   }),
 });
 
@@ -40,4 +44,5 @@ export const {
   useGetTokenListQuery,
   useGetRichListQuery,
   useGetWalletGrowthQuery,
+  useGetBalanceChangeQuery,
 } = api;

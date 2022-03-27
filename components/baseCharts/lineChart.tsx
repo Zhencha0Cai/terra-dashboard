@@ -9,14 +9,18 @@ import {
   Line,
   Label,
   ResponsiveContainer,
+  XAxisProps,
+  TooltipProps,
 } from "recharts";
 import { dataFormater, initLegendState, onClickLegend } from "../../lib/util";
 
 interface ChartProps {
   ids: Array<string>;
   data: any;
+  xAxisProps?: XAxisProps;
+  tooltipProps?: TooltipProps<string, string>;
 }
-const LineChart = ({ ids, data }: ChartProps) => {
+const LineChart = ({ ids, data, xAxisProps, tooltipProps }: ChartProps) => {
   const [legend, setLegend] = useState(() => initLegendState(ids));
   return (
     <ResponsiveContainer debounce={1}>
@@ -30,9 +34,13 @@ const LineChart = ({ ids, data }: ChartProps) => {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis domain={[0, "dataMax"]} tickFormatter={dataFormater} />
-        <Tooltip formatter={dataFormater} />
+        <XAxis dataKey="date" {...xAxisProps} />
+        <YAxis
+          type="number"
+          domain={[0, "auto"]}
+          tickFormatter={dataFormater}
+        />
+        <Tooltip formatter={dataFormater} {...tooltipProps} />
         {ids.length > 1 ? (
           <>
             <Legend onClick={(event) => onClickLegend(event, setLegend)} />
@@ -47,6 +55,7 @@ const LineChart = ({ ids, data }: ChartProps) => {
                   fill={color}
                   hide={hide}
                   dot={false}
+                  strokeWidth={3}
                 />
               );
             })}
@@ -59,6 +68,7 @@ const LineChart = ({ ids, data }: ChartProps) => {
             stroke={"#82ca9d"}
             fill={"#82ca9d"}
             dot={false}
+            strokeWidth={3}
           />
         )}
         <Label value="Pages of my website" offset={0} position="top" />

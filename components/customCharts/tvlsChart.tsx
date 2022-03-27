@@ -1,7 +1,7 @@
 import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
 import { useGetTvlsQuery } from "../../services/api";
-import LoadingStack from "../loadingStack";
+import LoadingStack from "../feedback/loadingStack";
 import StackedAreaChart from "../baseCharts/stackedAreaChart";
 
 const TvlChart = () => {

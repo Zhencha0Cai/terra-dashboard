@@ -17,3 +17,9 @@ model MmOverseerEpochStates {
   createdAt            DateTime @db.DateTime(0)
   updatedAt            DateTime @db.DateTime(0)
 }
+
+model BalanceHistory {
+  address    String  @id @db.Char(44)
+  prev_height String? @db.VarChar(255)
+  balance_history    Json?
+}

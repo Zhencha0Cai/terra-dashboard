@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useGetTxVolumeQuery } from "../../services/api";
 import CustomBarChart from "../baseCharts/barChart";
 import LineChart from "../baseCharts/lineChart";
-import LoadingStack from "../loadingStack";
+import LoadingStack from "../feedback/loadingStack";
 
 const TxVolumeChart = () => {
   const { data, isLoading } = useGetTxVolumeQuery();

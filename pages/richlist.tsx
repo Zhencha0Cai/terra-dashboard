@@ -1,8 +1,7 @@
-import { Center, Spinner } from "@chakra-ui/react";
 import { readDenom } from "@terra.kitchen/utils";
 import React, { useState } from "react";
 import CustomTable from "../components/customTable";
-import LoadingStack from "../components/loadingStack";
+import CustomSpinner from "../components/feedback/customSpinner";
 import Search from "../components/search";
 import { useGetRichListQuery } from "../services/api";
 import { SearchOptionParams } from "../types/common";
@@ -12,18 +11,7 @@ const RichList = () => {
   const { isLoading, data } = useGetRichListQuery(token);
   const [activePage, setActivePage] = useState(1);
 
-  if (isLoading)
-    return (
-      <Center h={"100vh"}>
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Center>
-    );
+  if (isLoading) return <CustomSpinner />;
   const handleOnOptionSelect = ({ item: { value } }: SearchOptionParams) => {
     setToken(value);
     setActivePage(1);
@@ -38,6 +26,7 @@ const RichList = () => {
         data={data}
         activePage={activePage}
         setActivePage={setActivePage}
+        token={token}
       ></CustomTable>
     </>
   );

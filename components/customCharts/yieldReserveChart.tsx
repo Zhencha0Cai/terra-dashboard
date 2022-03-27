@@ -1,7 +1,7 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { useGetYieldReserveQuery } from "../../services/api";
 import LineChart from "../baseCharts/lineChart";
-import LoadingStack from "../loadingStack";
+import LoadingStack from "../feedback/loadingStack";
 
 const YieldReserveChart = () => {
   const { data, error, isLoading } = useGetYieldReserveQuery();

@@ -8,7 +8,6 @@ import {
   Icon,
   Text,
   useColorModeValue,
-  Image,
   BoxProps,
 } from "@chakra-ui/react";
 import { GrMoney } from "react-icons/gr";
@@ -16,7 +15,6 @@ import React from "react";
 import { FcComboChart } from "react-icons/fc";
 import TerraIcon from "../icons/terraIcon";
 import Link from "next/link";
-import { type } from "os";
 import { IconType } from "react-icons";
 
 type SideBarProps = {

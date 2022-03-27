@@ -12,7 +12,7 @@ import { useState } from "react";
 import { useGetWalletGrowthQuery } from "../../services/api";
 import CustomBarChart from "../baseCharts/barChart";
 import LineChart from "../baseCharts/lineChart";
-import LoadingStack from "../loadingStack";
+import LoadingStack from "../feedback/loadingStack";
 
 const WalletGrowthChart = () => {
   const { data, isLoading } = useGetWalletGrowthQuery();

@@ -1,9 +1,7 @@
 import LineChart from "../baseCharts/lineChart";
 import { useGetStableCoinsQuery } from "../../services/api";
-import { ResponsiveContainer } from "recharts";
-import { Box, Heading, Skeleton, Stack } from "@chakra-ui/react";
-import LoadingStack from "../loadingStack";
-
+import { Box, Heading } from "@chakra-ui/react";
+import LoadingStack from "../feedback/loadingStack";
 const StableCoinMarketCapChart = () => {
   const { data, error, isLoading } = useGetStableCoinsQuery();
 
