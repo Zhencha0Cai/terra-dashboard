@@ -38,7 +38,7 @@ const Layout = ({ children }: any) => {
                 ml={0}
               >
                 <SideBar isOpen={isOpen} onClose={onClose} />
-                <Divider orientation="vertical" />
+                <Divider orientation="vertical" h={"full"} />
               </Box>
             }
 

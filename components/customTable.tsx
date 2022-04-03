@@ -161,7 +161,7 @@ const CustomTable = ({
       No Data Found
     </Alert>
   ) : (
-    <Box w={"100%"} p="5%" mx={"2%"}>
+    <Box w={"100%"} p="5%" overflowX="auto">
       {address && (
         <ModalChart
           isOpen={isOpen}
@@ -191,7 +191,7 @@ const CustomTable = ({
                   <Tr key={i}>
                     <Td>{i + Math.floor((activePage - 1) * PAGE_SIZE) + 1} </Td>
                     <Td>
-                      <HStack>
+                      <HStack wrap={"wrap"}>
                         <Link
                           href={`https://finder.extraterrestrial.money/mainnet/address/${account}`}
                           isExternal
