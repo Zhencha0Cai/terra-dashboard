@@ -6,6 +6,7 @@ import { store } from "../stores";
 import theme from "../theme";
 import "semantic-ui-css/semantic.min.css";
 import Layout from "../components/layout";
+import "focus-visible/dist/focus-visible";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

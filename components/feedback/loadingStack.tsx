@@ -1,12 +1,14 @@
-import { Skeleton, Stack } from "@chakra-ui/react";
+import { Center, Skeleton, Stack } from "@chakra-ui/react";
 
 const LoadingStack = () => {
   return (
-    <Stack w={"100%"} h="100%">
-      <Skeleton w={"100%"} h="10em"></Skeleton>
-      <Skeleton w={"100%"} h="10em"></Skeleton>
-      <Skeleton w={"100%"} h="10em"></Skeleton>
-    </Stack>
+    <Center w={"90%"}>
+      <Stack w={"100%"} h="100%">
+        <Skeleton w={"100%"} h="10em"></Skeleton>
+        <Skeleton w={"100%"} h="10em"></Skeleton>
+        <Skeleton w={"100%"} h="10em"></Skeleton>
+      </Stack>
+    </Center>
   );
 };
 

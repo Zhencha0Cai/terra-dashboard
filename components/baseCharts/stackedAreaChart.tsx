@@ -10,7 +10,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { dataFormater, initLegendState, onClickLegend } from "../../lib/util";
-const StackedAreaChart = ({ ids, data }: { ids: Array<string>; data: any }) => {
+import { ChartProps } from "../../types/common";
+
+const StackedAreaChart = ({ ids, data, yAxisProps }: ChartProps) => {
   const [legend, setLegend] = useState(() => initLegendState(ids));
   return (
     <ResponsiveContainer>
@@ -25,7 +27,7 @@ const StackedAreaChart = ({ ids, data }: { ids: Array<string>; data: any }) => {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
-        <YAxis tickFormatter={dataFormater} />
+        <YAxis tickFormatter={dataFormater} {...yAxisProps} />
         <Tooltip formatter={dataFormater} />
         <Legend onClick={(event) => onClickLegend(event, setLegend)} />{" "}
         {ids.map((id) => {

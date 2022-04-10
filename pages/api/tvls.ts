@@ -50,7 +50,7 @@ const formatTvlData = (chainData: Array<any>) => {
   for (const { name, data } of chainData) {
     ids.add(name);
     data.data.forEach((obj: any) => {
-      const date = format(fromUnixTime(parseInt(obj.date)), "MM/dd/yyyy");
+      const date = format(fromUnixTime(parseInt(obj.date)), "yyyy/MM/dd");
       map.set(date, {
         ...(map.get(date) || { date }),
         [name]: obj.totalLiquidityUSD,

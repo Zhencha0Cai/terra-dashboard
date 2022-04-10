@@ -7,10 +7,6 @@ import {
   Heading,
   HStack,
   Link,
-  Modal,
-  ModalCloseButton,
-  ModalContent,
-  ModalOverlay,
   Table,
   Tbody,
   Td,
@@ -21,6 +17,7 @@ import {
   useBreakpointValue,
   useDisclosure,
   Text,
+  Flex,
 } from "@chakra-ui/react";
 import { Pagination } from "semantic-ui-react";
 import React from "react";
@@ -33,6 +30,8 @@ import { format, getTime } from "date-fns";
 import { TooltipProps } from "recharts";
 import CustomSpinner from "./feedback/customSpinner";
 import { knownAddressesMap } from "../constants/constants";
+import ModalWrapper from "./ModalWrapper";
+import { dataFormater } from "../lib/util";
 
 interface CustomTableProps {
   data: any;
@@ -59,9 +58,7 @@ const CustomTooltip = (props: TooltipProps<string, string>) => {
         </p>
         <Text color="green">
           {"Balance : "}
-          <em>
-            {currData ? readAmount(currData.balance, { prefix: true }) : " -- "}
-          </em>
+          <em>{currData ? dataFormater(currData.balance) : " -- "}</em>
         </Text>
       </Box>
     );
@@ -82,39 +79,35 @@ const ModalChart = ({
     ?.map((b) => b.filter(({ denom }) => denom === token))
     .map((balance, i) => {
       return {
-        balance: Number(balance[0]?.amount) || 0,
+        balance: Number(readAmount(balance[0]?.amount)),
         date: getTime(new Date(data.date[i])),
       };
     });
-
   return (
-    <Modal
+    <ModalWrapper
       isOpen={isOpen}
       onClose={() => {
         onClose();
         setAddress("");
       }}
-      isCentered
     >
-      <ModalOverlay />
-      <ModalContent overflowY={"hidden"} maxW={["85%"]} maxH="90%">
-        <ModalCloseButton />
-        <Box
-          borderWidth="1px"
-          borderRadius="lg"
-          boxShadow="xl"
-          p={5}
-          w={["100%"]}
-          h={"50em"}
-        >
-          <Heading as="h3" size="md" textAlign={"center"}>
+      {isLoading || !processedData ? (
+        <CustomSpinner />
+      ) : (
+        <>
+          <Heading as="h3" size="sm" textAlign={"left"} p="2">
             {`Historical ${readDenom(token)} balance of `}
             <AddressLabel address={address} />
             {` ${address}`}
           </Heading>
-          {isLoading || !processedData ? (
-            <CustomSpinner />
-          ) : (
+          <Flex p={2}>
+            <Heading size={"md"}>
+              {`Balnce: ${
+                dataFormater(processedData?.slice(-1)[0]?.balance) || 0
+              }`}
+            </Heading>
+          </Flex>
+          <Box h="90%">
             <LineChart
               ids={["balance"]}
               data={processedData}
@@ -131,10 +124,10 @@ const ModalChart = ({
                 ),
               }}
             />
-          )}
-        </Box>
-      </ModalContent>
-    </Modal>
+          </Box>
+        </>
+      )}
+    </ModalWrapper>
   );
 };
 const AddressLabel = ({ address }: { address: string }) => {

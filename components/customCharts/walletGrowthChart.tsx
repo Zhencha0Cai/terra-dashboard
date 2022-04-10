@@ -13,6 +13,7 @@ import { useGetWalletGrowthQuery } from "../../services/api";
 import CustomBarChart from "../baseCharts/barChart";
 import LineChart from "../baseCharts/lineChart";
 import LoadingStack from "../feedback/loadingStack";
+import { dataFormater } from "../../lib/util";
 
 const WalletGrowthChart = () => {
   const { data, isLoading } = useGetWalletGrowthQuery();
@@ -35,8 +36,8 @@ const WalletGrowthChart = () => {
       borderRadius={"lg"}
       boxShadow={"xl"}
       p={5}
-      w="100%"
-      h="27em"
+      w={["90%"]}
+      h={"60%"}
     >
       <Tabs
         align="center"
@@ -44,9 +45,10 @@ const WalletGrowthChart = () => {
         index={tabIndex}
         onChange={handleTabChange}
         size="sm"
+        h={["80%", "90%", "90%"]}
       >
         <Flex justify={"space-between"}>
-          <Heading as="h5" size={"sm"} textAlign={"center"} p={2}>
+          <Heading as="h2" size={"sm"} textAlign={"center"} p={2}>
             Wallets
           </Heading>
           <Flex>
@@ -54,11 +56,12 @@ const WalletGrowthChart = () => {
               value={walletType}
               size={"sm"}
               width={"6em"}
-              onChange={(e) =>
+              onChange={(e) => {
                 e.target.value === "active" && type === "cumulative"
                   ? setWalletType("total")
-                  : setWalletType(e.target.value)
-              }
+                  : setWalletType(e.target.value);
+                setTabIndex(0);
+              }}
             >
               <option value={"total"}>Total</option>
               <option value={"active"}>Active</option>
@@ -67,20 +70,42 @@ const WalletGrowthChart = () => {
               value={type}
               size={"sm"}
               width={"9em"}
-              onChange={(e) =>
+              onChange={(e) => {
                 e.target.value === "cumulative" && walletType === "active"
                   ? setType("periodic")
-                  : setType(e.target.value)
-              }
+                  : setType(e.target.value);
+                setTabIndex(0);
+              }}
             >
               <option value={"periodic"}>Periodic</option>
               <option value={"cumulative"}>Cumulative</option>
             </Select>
           </Flex>
         </Flex>
-        <Box w="100%" h="20em">
+        <Flex p={2}>
+          <Heading size={"md"}>
+            {dataFormater(data[type][walletType].slice(-1)[0].value)} Wallets
+          </Heading>
+        </Flex>
+
+        <Box w="100%" minH={"20em"} h="90%">
           {type === "cumulative" ? (
-            <LineChart ids={ids} data={slicedData}></LineChart>
+            <LineChart
+              ids={ids}
+              data={slicedData}
+              yAxisProps={{
+                label: {
+                  value: "# of wallets",
+                  angle: -90,
+                  position: "left",
+                  style: {
+                    textAnchor: "middle",
+                    fontSize: "80%",
+                    fill: "gray",
+                  },
+                },
+              }}
+            ></LineChart>
           ) : (
             <CustomBarChart ids={ids} data={slicedData}></CustomBarChart>
           )}

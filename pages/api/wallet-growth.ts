@@ -11,7 +11,7 @@ interface AccountData {
 const formatDate = (data: AccountData[]) => {
   return data.map(({ datetime, value }) => {
     return {
-      date: format(datetime, "MM/dd/yy"),
+      date: format(datetime, "yyyy/MM/dd"),
       value,
     };
   });

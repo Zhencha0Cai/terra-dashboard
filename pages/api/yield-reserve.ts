@@ -18,7 +18,7 @@ export const getYieldReserve = async (
     yieldReserveData: data.map(({ prev_interest_buffer, createdAt }) => {
       return {
         yieldReserve: parseInt(prev_interest_buffer) / 1000_000,
-        date: format(createdAt, "MM/dd/yyyy"),
+        date: format(createdAt, "yyyy/MM/dd"),
       };
     }),
   };

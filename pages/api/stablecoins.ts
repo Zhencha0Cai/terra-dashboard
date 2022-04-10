@@ -1,8 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
-import { sub, format, add, isBefore, parse } from "date-fns";
+import { sub, format, add, isBefore, parse, parseISO } from "date-fns";
 import client, { withRedis } from "../../lib/redis";
 import { COINGECKO_URL } from "../../constants/constants";
+
+interface MetaData {
+  id: string;
+  name: string;
+  image: string;
+  symbol: string;
+}
 
 const getCoinMarketCap = async (id: String, date: string) => {
   const { data } = await axios({
@@ -34,7 +41,7 @@ const getCoinMarketCap = async (id: String, date: string) => {
 };
 
 const getCoinsMarketCapRange = async (
-  ids: Array<String>,
+  metaData: MetaData[],
   startDate: Date,
   endDate: Date
 ) => {
@@ -46,7 +53,7 @@ const getCoinsMarketCapRange = async (
       currentDate = add(currentDate, { months: 1 })
     ) {
       res.push(
-        ...ids.map((id: String) =>
+        ...metaData.map(({ id }) =>
           getCoinMarketCap(id, format(currentDate, "dd-MM-yyyy"))
         )
       );
@@ -64,21 +71,30 @@ const getStableCoins = async (req: NextApiRequest, res: NextApiResponse) => {
     `${COINGECKO_URL}/coins/markets?vs_currency=usd&category=stablecoins&order=market_cap_desc`
   );
 
-  const ids = data.slice(0, 5).map((coin: { id: String }) => coin.id);
+  const metaData = data
+    .slice(0, 5)
+    .map(({ id, name, image, symbol }: MetaData) => {
+      return {
+        id,
+        name,
+        image,
+        symbol,
+      };
+    });
   let marketCapData =
-    (await getCoinsMarketCapRange(ids, startDate, endDate)) || [];
+    (await getCoinsMarketCapRange(metaData, startDate, endDate)) || [];
   marketCapData = Object.values(
     marketCapData.reduce((obj, data) => {
       if (!obj[data.date]) {
         obj[data.date] = {};
       }
-      obj[data.date]["date"] = data.date;
+      obj[data.date]["date"] = format(new Date(data.date), "yyyy-MM-dd");
       obj[data.date][data.id] = data[data.id];
       obj[data.date];
       return obj;
     }, {})
   );
-  const result = { ids, marketCapData };
+  const result = { metaData, marketCapData };
   client.setEx(req.url as string, 60, JSON.stringify(result));
   res.status(200).json(result);
 };

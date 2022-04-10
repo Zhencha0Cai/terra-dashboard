@@ -1,8 +1,10 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, Tooltip } from "@chakra-ui/react";
 import React from "react";
 import { useGetTvlsQuery } from "../../services/api";
 import LoadingStack from "../feedback/loadingStack";
 import StackedAreaChart from "../baseCharts/stackedAreaChart";
+import { dataFormater } from "../../lib/util";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 
 const TvlChart = () => {
   const { data, error, isLoading } = useGetTvlsQuery();
@@ -16,13 +18,41 @@ const TvlChart = () => {
       borderRadius="lg"
       boxShadow="xl"
       p={5}
-      w="100%"
-      h="20em"
+      w={["90%"]}
+      h={"60%"}
     >
-      <Heading as="h5" size="sm" textAlign={"center"}>
-        {"Top TVLs"}
+      <Heading as="h2" size="sm" textAlign={"left"} p="2">
+        {"Top TVL Chains "}
+        <Tooltip label="Data Source: DefiLlama">
+          <InfoOutlineIcon />
+        </Tooltip>
       </Heading>
-      <StackedAreaChart ids={data.ids} data={data.data}></StackedAreaChart>
+      <Flex p="2">
+        {data.ids.map((id: string) => {
+          return (
+            <Heading size={"md"} key={id} pr="2">
+              {`${id}: ${dataFormater(data.data.slice(-1)[0][id])}`}
+            </Heading>
+          );
+        })}
+      </Flex>
+      <Box h="90%">
+        <StackedAreaChart
+          ids={data.ids}
+          data={data.data}
+          yAxisProps={{
+            label: {
+              value: "UST",
+              angle: -90,
+              position: "insideLeft",
+              style: {
+                fill: "gray",
+              },
+            },
+            width: 80,
+          }}
+        ></StackedAreaChart>
+      </Box>
     </Box>
   );
 };

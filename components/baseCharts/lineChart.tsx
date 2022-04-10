@@ -9,18 +9,17 @@ import {
   Line,
   Label,
   ResponsiveContainer,
-  XAxisProps,
-  TooltipProps,
 } from "recharts";
 import { dataFormater, initLegendState, onClickLegend } from "../../lib/util";
+import { ChartProps } from "../../types/common";
 
-interface ChartProps {
-  ids: Array<string>;
-  data: any;
-  xAxisProps?: XAxisProps;
-  tooltipProps?: TooltipProps<string, string>;
-}
-const LineChart = ({ ids, data, xAxisProps, tooltipProps }: ChartProps) => {
+const LineChart = ({
+  ids,
+  data,
+  xAxisProps,
+  yAxisProps,
+  tooltipProps,
+}: ChartProps) => {
   const [legend, setLegend] = useState(() => initLegendState(ids));
   return (
     <ResponsiveContainer debounce={1}>
@@ -33,12 +32,13 @@ const LineChart = ({ ids, data, xAxisProps, tooltipProps }: ChartProps) => {
           bottom: 15,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
+        <CartesianGrid vertical={false} strokeDasharray="3 3" />
         <XAxis dataKey="date" {...xAxisProps} />
         <YAxis
           type="number"
           domain={[0, "auto"]}
           tickFormatter={dataFormater}
+          {...yAxisProps}
         />
         <Tooltip formatter={dataFormater} {...tooltipProps} />
         {ids.length > 1 ? (

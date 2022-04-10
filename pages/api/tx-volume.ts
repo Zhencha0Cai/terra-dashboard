@@ -25,7 +25,7 @@ const formatTxData = (data: TxVolumeCollection) => {
   return Object.keys(data).reduce((acc: any, key) => {
     acc[key] = data[key].map(({ datetime, txVolume }) => {
       return {
-        date: format(new Date(datetime), "MM/dd/yy"),
+        date: format(new Date(datetime), "yyyy/MM/dd"),
         txVolume: parseFloat(readAmount(txVolume)),
       };
     });
