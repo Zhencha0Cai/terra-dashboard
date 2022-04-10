@@ -31,6 +31,17 @@ const TxVolumeChart = () => {
   };
   if (isLoading) return <LoadingStack />;
   const { ids } = data;
+  const yAxisProps = {
+    label: {
+      value: "# of transactions",
+      angle: -90,
+      position: "left",
+      style: {
+        textAnchor: "middle",
+        fill: "gray",
+      },
+    },
+  };
   return (
     <Box
       borderWidth={"1px"}
@@ -38,7 +49,7 @@ const TxVolumeChart = () => {
       boxShadow={"xl"}
       p={5}
       w={["90%"]}
-      h={"60%"}
+      h={["90%", "90%", "60%"]}
     >
       <Tabs
         align="center"
@@ -92,20 +103,14 @@ const TxVolumeChart = () => {
             <LineChart
               ids={ids}
               data={slicedData}
-              yAxisProps={{
-                label: {
-                  value: "# of transactions",
-                  angle: -90,
-                  position: "left",
-                  style: {
-                    textAnchor: "middle",
-                    fill: "gray",
-                  },
-                },
-              }}
+              yAxisProps={yAxisProps}
             ></LineChart>
           ) : (
-            <CustomBarChart ids={ids} data={slicedData}></CustomBarChart>
+            <CustomBarChart
+              ids={ids}
+              data={slicedData}
+              yAxisProps={yAxisProps}
+            ></CustomBarChart>
           )}
         </Box>
 

@@ -1,4 +1,4 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { dataFormater } from "../../lib/util";
 import { useGetYieldReserveQuery } from "../../services/api";
 import LineChart from "../baseCharts/lineChart";
@@ -18,15 +18,15 @@ const YieldReserveChart = () => {
       boxShadow="xl"
       p={5}
       w={["90%"]}
-      h={"60%"}
+      h={["90%", "90%", "60%"]}
     >
       <Heading as="h5" size="sm" textAlign={"left"} p="2">
         {"Anchor Yield Reserve"}
       </Heading>
       <Flex p={2}>
-        <Heading size={"md"}>
+        <Text size={"md"}>
           {dataFormater(yieldReserveData.slice(-1)[0]?.yieldReserve)}
-        </Heading>
+        </Text>
       </Flex>
       <Box h="90%">
         <LineChart

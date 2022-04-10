@@ -27,7 +27,11 @@ const StackedAreaChart = ({ ids, data, yAxisProps }: ChartProps) => {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
-        <YAxis tickFormatter={dataFormater} {...yAxisProps} />
+        <YAxis
+          tickFormatter={dataFormater}
+          {...yAxisProps}
+          style={{ fontSize: "0.8em" }}
+        />
         <Tooltip formatter={dataFormater} />
         <Legend onClick={(event) => onClickLegend(event, setLegend)} />{" "}
         {ids.map((id) => {

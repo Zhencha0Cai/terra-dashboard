@@ -30,6 +30,17 @@ const WalletGrowthChart = () => {
   };
   if (isLoading) return <LoadingStack />;
   const { ids } = data;
+  const yAxisProps = {
+    label: {
+      value: "# of wallets",
+      angle: -90,
+      position: "left",
+      style: {
+        textAnchor: "middle",
+        fill: "gray",
+      },
+    },
+  };
   return (
     <Box
       borderWidth={"1px"}
@@ -37,7 +48,7 @@ const WalletGrowthChart = () => {
       boxShadow={"xl"}
       p={5}
       w={["90%"]}
-      h={"60%"}
+      h={["90%", "90%", "60%"]}
     >
       <Tabs
         align="center"
@@ -93,21 +104,14 @@ const WalletGrowthChart = () => {
             <LineChart
               ids={ids}
               data={slicedData}
-              yAxisProps={{
-                label: {
-                  value: "# of wallets",
-                  angle: -90,
-                  position: "left",
-                  style: {
-                    textAnchor: "middle",
-                    fontSize: "80%",
-                    fill: "gray",
-                  },
-                },
-              }}
+              yAxisProps={yAxisProps}
             ></LineChart>
           ) : (
-            <CustomBarChart ids={ids} data={slicedData}></CustomBarChart>
+            <CustomBarChart
+              ids={ids}
+              data={slicedData}
+              yAxisProps={yAxisProps}
+            ></CustomBarChart>
           )}
         </Box>
 

@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Tooltip } from "@chakra-ui/react";
+import { Box, Flex, Heading, Tooltip, Text } from "@chakra-ui/react";
 import React from "react";
 import { useGetTvlsQuery } from "../../services/api";
 import LoadingStack from "../feedback/loadingStack";
@@ -19,7 +19,7 @@ const TvlChart = () => {
       boxShadow="xl"
       p={5}
       w={["90%"]}
-      h={"60%"}
+      h={["90%", "90%", "60%"]}
     >
       <Heading as="h2" size="sm" textAlign={"left"} p="2">
         {"Top TVL Chains "}
@@ -30,9 +30,9 @@ const TvlChart = () => {
       <Flex p="2">
         {data.ids.map((id: string) => {
           return (
-            <Heading size={"md"} key={id} pr="2">
+            <Text size={"md"} key={id} pr="2">
               {`${id}: ${dataFormater(data.data.slice(-1)[0][id])}`}
-            </Heading>
+            </Text>
           );
         })}
       </Flex>

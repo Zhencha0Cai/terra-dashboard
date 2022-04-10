@@ -29,7 +29,7 @@ const StableCoinMarketCapChart = () => {
       boxShadow="xl"
       p={5}
       w={["90%"]}
-      h={"60%"}
+      h={["90%", "90%", "60%"]}
     >
       <Heading as="h2" size="sm" textAlign={"left"} p={2}>
         {"Top stablecoins market cap "}
@@ -41,9 +41,9 @@ const StableCoinMarketCapChart = () => {
         {metaData.map(({ id, name }: { id: string; name: string }) => {
           return (
             <>
-              <Heading size={"md"} key={name} pr="2">
+              <Text size={"md"} key={name} pr="2">
                 {`${name}: ${dataFormater(marketCapData.slice(-1)[0][id])}`}
-              </Heading>
+              </Text>
             </>
           );
         })}

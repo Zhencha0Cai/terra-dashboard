@@ -38,6 +38,7 @@ const LineChart = ({
           type="number"
           domain={[0, "auto"]}
           tickFormatter={dataFormater}
+          style={{ fontSize: "0.9em" }}
           {...yAxisProps}
         />
         <Tooltip formatter={dataFormater} {...tooltipProps} />
