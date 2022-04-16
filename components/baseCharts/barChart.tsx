@@ -15,7 +15,7 @@ const CustomBarChart = ({ ids, data, yAxisProps }: ChartProps) => {
     <ResponsiveContainer>
       <BarChart data={data} margin={{ left: 20 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
+        <XAxis dataKey="date" fontSize={"0.8em"} />
         <YAxis
           tickFormatter={dataFormater}
           style={{ fontSize: "0.9em" }}

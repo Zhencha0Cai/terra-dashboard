@@ -1,16 +1,16 @@
 import { Box, Flex, Heading, Tooltip, Text } from "@chakra-ui/react";
 import React from "react";
 import { useGetTvlsQuery } from "../../services/api";
-import LoadingStack from "../feedback/loadingStack";
 import StackedAreaChart from "../baseCharts/stackedAreaChart";
 import { dataFormater } from "../../lib/util";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
+import Spinner from "../feedback/customSpinner";
 
 const TvlChart = () => {
   const { data, error, isLoading } = useGetTvlsQuery();
 
   if (isLoading) {
-    return <LoadingStack />;
+    return <Spinner />;
   }
   return (
     <Box

@@ -1,24 +1,15 @@
 import LineChart from "../baseCharts/lineChart";
 import { useGetStableCoinsQuery } from "../../services/api";
-import {
-  Box,
-  Flex,
-  Heading,
-  HStack,
-  Spacer,
-  Text,
-  Tooltip,
-  VStack,
-} from "@chakra-ui/react";
-import LoadingStack from "../feedback/loadingStack";
+import { Box, Flex, Heading, Text, Tooltip } from "@chakra-ui/react";
 import { dataFormater } from "../../lib/util";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
+import Spinner from "../feedback/customSpinner";
 
 const StableCoinMarketCapChart = () => {
   const { data, error, isLoading } = useGetStableCoinsQuery();
 
   if (isLoading || !data) {
-    return <LoadingStack />;
+    return <Spinner />;
   }
   const { metaData, marketCapData } = data;
 

@@ -117,49 +117,51 @@ export default function SideBar({ isOpen, onClose }: SideBarProps) {
               </AccordionButton>
             }
           />
-          <AccordionPanel>
-            <UnorderedList
-              listStylePosition={"inside"}
-              color="gray.500"
-              width={"100%"}
-            >
-              {subRoutes.map(({ href, title }) => {
-                return (
-                  <NextLink key={href} href={href} passHref>
-                    <Link
-                      cursor="pointer"
-                      color={active[href] ? "green.400" : "inherit"}
-                      fontWeight={active[href] ? "bold" : "inherit"}
-                      _hover={{
-                        textDecoration: "none",
-                      }}
-                    >
-                      <ListItem
-                        key={href}
-                        p={3}
-                        w={"100%"}
-                        borderRadius={10}
-                        onClick={() =>
-                          setActive({
-                            ...initActiveState,
-                            [DEFAULT_ROUTE]: false,
-                            [href]: true,
-                          })
-                        }
+          {subRoutes.length > 0 ? (
+            <AccordionPanel>
+              <UnorderedList
+                listStylePosition={"inside"}
+                color="gray.500"
+                width={"100%"}
+              >
+                {subRoutes.map(({ href, title }) => {
+                  return (
+                    <NextLink key={href} href={href} passHref>
+                      <Link
+                        cursor="pointer"
+                        color={active[href] ? "green.400" : "inherit"}
+                        fontWeight={active[href] ? "bold" : "inherit"}
                         _hover={{
-                          bg: "gray.100",
+                          textDecoration: "none",
                         }}
                       >
-                        <Text display={"inline"} color={"black"}>
-                          {title}
-                        </Text>
-                      </ListItem>
-                    </Link>
-                  </NextLink>
-                );
-              })}
-            </UnorderedList>
-          </AccordionPanel>
+                        <ListItem
+                          key={href}
+                          p={3}
+                          w={"100%"}
+                          borderRadius={10}
+                          onClick={() =>
+                            setActive({
+                              ...initActiveState,
+                              [DEFAULT_ROUTE]: false,
+                              [href]: true,
+                            })
+                          }
+                          _hover={{
+                            bg: "gray.100",
+                          }}
+                        >
+                          <Text display={"inline"} color={"black"}>
+                            {title}
+                          </Text>
+                        </ListItem>
+                      </Link>
+                    </NextLink>
+                  );
+                })}
+              </UnorderedList>
+            </AccordionPanel>
+          ) : null}
         </h1>
       </AccordionItem>
     );

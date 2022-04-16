@@ -7,14 +7,15 @@ import {
   Tab,
   TabList,
   Tabs,
+  Text,
 } from "@chakra-ui/react";
 import { readDenom } from "@terra.kitchen/utils";
 import { useState } from "react";
 import { useGetTxVolumeQuery } from "../../services/api";
 import CustomBarChart from "../baseCharts/barChart";
 import LineChart from "../baseCharts/lineChart";
-import LoadingStack from "../feedback/loadingStack";
 import { dataFormater } from "../../lib/util";
+import Spinner from "../feedback/customSpinner";
 
 const TxVolumeChart = () => {
   const { data, isLoading } = useGetTxVolumeQuery();
@@ -29,7 +30,7 @@ const TxVolumeChart = () => {
     setTabIndex(i);
     setSlicedData(data[type][denom].slice([0, -7, -14, -30][i]));
   };
-  if (isLoading) return <LoadingStack />;
+  if (isLoading) return <Spinner />;
   const { ids } = data;
   const yAxisProps = {
     label: {
@@ -94,9 +95,9 @@ const TxVolumeChart = () => {
           </Flex>
         </Flex>
         <Flex p={2}>
-          <Heading size={"md"}>
+          <Text size={"sm"}>
             {dataFormater(data[type][denom].slice(-1)[0].txVolume)} Transactions
-          </Heading>
+          </Text>
         </Flex>
         <Box w="100%" h="90%">
           {type === "cumulative" ? (

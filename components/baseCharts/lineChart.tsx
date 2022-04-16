@@ -33,10 +33,10 @@ const LineChart = ({
         }}
       >
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
-        <XAxis dataKey="date" {...xAxisProps} />
+        <XAxis dataKey="date" {...xAxisProps} fontSize={"0.9em"} />
         <YAxis
           type="number"
-          domain={[0, "auto"]}
+          domain={["auto", "auto"]}
           tickFormatter={dataFormater}
           style={{ fontSize: "0.9em" }}
           {...yAxisProps}

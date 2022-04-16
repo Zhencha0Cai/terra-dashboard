@@ -4,10 +4,10 @@ import StableCoinMarketCapChart from "../components/customCharts/stableCoinMarke
 import TvlChart from "../components/customCharts/tvlsChart";
 import TxVolumeChart from "../components/customCharts/txVolumeChart";
 import WalletGrowthChart from "../components/customCharts/walletGrowthChart";
-import YieldReserveChart from "../components/customCharts/yieldReserveChart";
 import RichList from "../pages/richlist";
 import TerraIcon from "../icons/terraIcon";
 import AnchorIcon from "../icons/anchorIcon";
+import Anchor from "../pages/anchor";
 
 export const ROUTES_PATH = {
   CROSS_CHAIN: "/cross-chain",
@@ -18,9 +18,6 @@ export const ROUTES_PATH = {
     return [this.CROSS_CHAIN, "stable-coin-market-cap"].join("/");
   },
   ANCHOR: "/anchor",
-  get YIELD_RESERVE() {
-    return [this.ANCHOR, "yield-reserve"].join("/");
-  },
   TERRA: "/terra",
   get TX() {
     return [this.TERRA, "tx"].join("/");
@@ -33,6 +30,12 @@ export const ROUTES_PATH = {
 
 export const routes = [
   {
+    href: ROUTES_PATH.ANCHOR,
+    title: "Anchor",
+    icon: AnchorIcon,
+    subRoutes: [],
+  },
+  {
     href: ROUTES_PATH.CROSS_CHAIN,
     title: "Cross Chain",
     icon: FcComboChart,
@@ -44,17 +47,6 @@ export const routes = [
       {
         href: ROUTES_PATH.TVL,
         title: "Total Value Locked",
-      },
-    ],
-  },
-  {
-    href: ROUTES_PATH.ANCHOR,
-    title: "Anchor",
-    icon: AnchorIcon,
-    subRoutes: [
-      {
-        href: ROUTES_PATH.YIELD_RESERVE,
-        title: "Yield Reserve",
       },
     ],
   },
@@ -84,7 +76,7 @@ export const routes = [
 export const routeToComponent = {
   [ROUTES_PATH.TVL]: TvlChart,
   [ROUTES_PATH.STABLE_COIN_MARKET_CAP]: StableCoinMarketCapChart,
-  [ROUTES_PATH.YIELD_RESERVE]: YieldReserveChart,
+  [ROUTES_PATH.ANCHOR]: Anchor,
   [ROUTES_PATH.TX]: TxVolumeChart,
   [ROUTES_PATH.WALLET_GROWTH]: WalletGrowthChart,
   [ROUTES_PATH.RICH_LIST]: RichList,

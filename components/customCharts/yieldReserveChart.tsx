@@ -1,16 +1,9 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { dataFormater } from "../../lib/util";
-import { useGetYieldReserveQuery } from "../../services/api";
+import { YieldReserveResponse } from "../../types/response";
 import LineChart from "../baseCharts/lineChart";
-import LoadingStack from "../feedback/loadingStack";
 
-const YieldReserveChart = () => {
-  const { data, error, isLoading } = useGetYieldReserveQuery();
-
-  if (isLoading) {
-    return <LoadingStack />;
-  }
-  const { ids, yieldReserveData } = data;
+const YieldReserveChart = ({ ids, yieldReserveData }: YieldReserveResponse) => {
   return (
     <Box
       borderWidth="1px"

@@ -5,7 +5,7 @@ module.exports = {
     return [
       {
         source: "/",
-        destination: "/cross-chain/stable-coin-market-cap",
+        destination: "/anchor",
         permanent: true,
       },
     ];

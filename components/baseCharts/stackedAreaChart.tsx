@@ -26,7 +26,7 @@ const StackedAreaChart = ({ ids, data, yAxisProps }: ChartProps) => {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
+        <XAxis dataKey="date" fontSize={"0.9em"} />
         <YAxis
           tickFormatter={dataFormater}
           {...yAxisProps}
