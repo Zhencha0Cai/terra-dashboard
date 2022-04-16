@@ -8,6 +8,7 @@ import RichList from "../pages/richlist";
 import TerraIcon from "../icons/terraIcon";
 import AnchorIcon from "../icons/anchorIcon";
 import Anchor from "../pages/anchor";
+import LFGIcon from "../icons/LFG";
 
 export const ROUTES_PATH = {
   CROSS_CHAIN: "/cross-chain",
@@ -26,6 +27,7 @@ export const ROUTES_PATH = {
     return [this.TERRA, "wallet-growth"].join("/");
   },
   RICH_LIST: "/richlist",
+  LFG: "/lfg",
 };
 
 export const routes = [
@@ -71,6 +73,12 @@ export const routes = [
     icon: GrMoney,
     subRoutes: [],
   },
+  {
+    href: ROUTES_PATH.LFG,
+    title: "Luna Foundation Guard (LFG)",
+    icon: LFGIcon,
+    subRoutes: [],
+  },
 ];
 
 export const routeToComponent = {
@@ -80,6 +88,7 @@ export const routeToComponent = {
   [ROUTES_PATH.TX]: TxVolumeChart,
   [ROUTES_PATH.WALLET_GROWTH]: WalletGrowthChart,
   [ROUTES_PATH.RICH_LIST]: RichList,
+  [ROUTES_PATH.LFG]: RichList,
 };
 
 export const DEFAULT_ROUTE = ROUTES_PATH.STABLE_COIN_MARKET_CAP;
