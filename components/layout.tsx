@@ -16,7 +16,7 @@ const Layout = ({ children }: any) => {
     <>
       <Box>
         <Head>
-          <title>Terra Dashboard</title>
+          <title>Terralytics Center</title>
           <meta name="description" content="Terra Dashboard" />
           <link rel="icon" href="/favicon.ico" />
         </Head>

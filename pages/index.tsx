@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Dashboard from "../components/dashboard";
 import { Flex } from "@chakra-ui/react";
 const Home: NextPage = () => {
   return (

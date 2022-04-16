@@ -18,12 +18,12 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import TerraIcon from "../icons/terraIcon";
 import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { DEFAULT_ROUTE, routes, routeToComponent } from "../constants/routes";
 import { useRouter } from "next/router";
+import KashIcon from "../icons/kash";
 
 type SideBarProps = {
   isOpen: boolean;
@@ -181,9 +181,9 @@ export default function SideBar({ isOpen, onClose }: SideBarProps) {
       {...props}
     >
       <Flex px="4" py="5" align="center">
-        <TerraIcon height="5rem" width="5rem" />
+        <KashIcon height="5rem" width="5rem" />
         <Text fontSize="2xl" fontWeight="semibold">
-          Terra Dashboard
+          Terralytics Center
         </Text>
       </Flex>
       <Accordion
