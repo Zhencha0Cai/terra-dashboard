@@ -32,6 +32,9 @@ export const api = createApi({
     getBalanceHistory: builder.query<BalanceHistory, string>({
       query: (account) => `balance/${account}`,
     }),
+    getTerraTvl: builder.query<void, void>({
+      query: () => "terra/tvl",
+    }),
   }),
 });
 
@@ -45,4 +48,5 @@ export const {
   useGetRichListQuery,
   useGetWalletGrowthQuery,
   useGetBalanceHistoryQuery,
+  useGetTerraTvlQuery,
 } = api;

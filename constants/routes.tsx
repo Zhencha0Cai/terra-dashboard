@@ -9,6 +9,7 @@ import TerraIcon from "../icons/terraIcon";
 import AnchorIcon from "../icons/anchorIcon";
 import Anchor from "../pages/anchor";
 import LFGIcon from "../icons/LFG";
+import TerraTvl from "../pages/terraTvl";
 
 export const ROUTES_PATH = {
   CROSS_CHAIN: "/cross-chain",
@@ -25,6 +26,9 @@ export const ROUTES_PATH = {
   },
   get WALLET_GROWTH() {
     return [this.TERRA, "wallet-growth"].join("/");
+  },
+  get TERRA_TVL() {
+    return [this.TERRA, "tvl"].join("/");
   },
   RICH_LIST: "/richlist",
   LFG: "/lfg",
@@ -48,7 +52,7 @@ export const routes = [
       },
       {
         href: ROUTES_PATH.TVL,
-        title: "Total Value Locked",
+        title: "Total Value Locked (TVL)",
       },
     ],
   },
@@ -64,6 +68,10 @@ export const routes = [
       {
         href: ROUTES_PATH.WALLET_GROWTH,
         title: "Wallet Growth",
+      },
+      {
+        href: ROUTES_PATH.TERRA_TVL,
+        title: "Protocol TVL",
       },
     ],
   },
@@ -89,6 +97,7 @@ export const routeToComponent = {
   [ROUTES_PATH.WALLET_GROWTH]: WalletGrowthChart,
   [ROUTES_PATH.RICH_LIST]: RichList,
   [ROUTES_PATH.LFG]: RichList,
+  [ROUTES_PATH.TERRA_TVL]: TerraTvl,
 };
 
 export const DEFAULT_ROUTE = ROUTES_PATH.STABLE_COIN_MARKET_CAP;

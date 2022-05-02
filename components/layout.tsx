@@ -42,7 +42,9 @@ const Layout = ({ children }: any) => {
               </Box>
             }
 
-            <Box w={["100%", "100%", "100%", "85%"]}>{children}</Box>
+            <Box overflow="auto" w={["100%", "100%", "100%", "85%"]}>
+              {children}
+            </Box>
           </Flex>
         </main>
       </Box>
